@@ -4,7 +4,7 @@
 (para cada time). Escrever o nome do vencedor. Caso não haja
 vencedor deverá ser impressa a palavra EMPATE.*/
 
-user function desvio8
+user function desvio8()
 
 local ctime := fwinputbox("Digite o nome do primeiro time: ")
 local ngols := fwinputbox(cValtoChar("Numero de gols marcados pelo primeiro time: "))
