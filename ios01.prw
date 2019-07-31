@@ -31,12 +31,11 @@ local cNome := oModelField:GetValue('ZA0_NOME') // Validação do Nome
 If dFalec > Date() //Condição para a validação da Data 
     lTudoOk := .F.
     Help(, , "Texto do Help", , "Não adivinhe o futuro", 1, 0, , , , , , {"Digite uma data valida de falecimento"})
-EndIf   
 
-If 'RICARDO' $ UPPER(cNome) .Or. Empty(cNome) //Condição para a validação do Nome
+ElseIf 'RICARDO' $ UPPER(cNome) .Or. Empty(cNome) //Condição para a validação do Nome
     lTudoOk := .F.
     Help(, , "Texto do Help", , "Ele não pode estar aqui", 1, 0, , , , , , {"Digite um nome valido"})
-EndIF    
+EndIf    
 
 return lTudoOk
 
