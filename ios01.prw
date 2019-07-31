@@ -4,7 +4,7 @@ user function ios01()
 local oBrowse := FWMBrowse():New() //Criar browse
 
 oBrowse:SetAlias('ZA0')
-/*'oBrowse:SetMenuDef('ios01')*/
+oBrowse:SetMenuDef('ios01')
 
 oBrowse:Activate() // ativar o browse
 
@@ -14,12 +14,12 @@ Static Function Menudef()
 
 Return FWMVCMenu('ios01') //Menu padrão com C.R.U.D.
 
-Static function ModelDef()
+Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA0MODEL')
-local oStruZA0 := FWFormStruct(1,'ZA0')
+local oStruZA0 := FWFormStruct(1,'ZA0') //cria estrutura
 local bPos := {|oModelField| PosVldAutor(oModelField) }
 
-oModel:AddFields('ZA0MASTER',/*Owner*/ ,oStruZA0,/**/, bPos)
+oModel:AddFields('ZA0MASTER',/*Owner*/ ,oStruZA0,/**/, bPos) // adiciona
 
 Return oModel
 
@@ -40,14 +40,14 @@ EndIf
 return lTudoOk
 
 
-Static Function ViewDef()
-local oView := FWFormView():New()
+Static Function ViewDef() //sempre static function
+local oView := FWFormView():New() //objeto da view
 local oStruct := FWFormStruct(2,'ZA0')
-oView:SetModel(ModelDef())
+oView:SetModel(ModelDef()) // linka a view com o model
 
 oView:AddField('ZA0_VIEW', oStruct, 'ZA0MASTER')
 oView:CreateHorizontalBox('BOXZA0', 100)
-oView:SetOwnerView('ZA0_VIEW','BOXZA0')
+oView:SetOwnerView('ZA0_VIEW','BOXZA0') //colocar um componente no outro
 
 Return oView
 
