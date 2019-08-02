@@ -12,14 +12,15 @@ Return
 
 Static Function Menudef()
 
-Return FWMVCMenu('iosmusic') //Menu padrão com C.R.U.D. //nome da fonte
+Return FWMVCMenu('iosmusic') //Menu padrÃ£o com C.R.U.D. //nome da fonte
 
 Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA1MODEL')
 local oStruZA1 := FWFormStruct(1,'ZA1') //cria estrutura
 local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
+local bValid := (|oModelGrid| ValidAutor(oModelGrid)) //validacao da linha do grid
 oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,) // adiciona
-oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2)
+oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2, , bValid)
 oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', 'xFilial("ZA2")'} }, ZA2 -> ( IndexKey(1)))
 
 oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Musica')
