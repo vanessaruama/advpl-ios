@@ -54,25 +54,25 @@ Static function ValidAutor(oModelGrid)
 local lRet := .F.
 local cCodAutor := oModelGrid:GetValue('ZA2_AUTOR')
 Local aArea := GetArea()
-local dFalec := oModelField:GetValue('ZA0_DTAFAL')
 
 DbSelectArea("ZA0") //Abre a tabela 
-ZA0->(DbSetOrder('ZA2_AUTOR')) //define o indice que será utilizado filial+codigo
+ZA0->(DbSetOrder(1)) //define o indice que será utilizado filial+codigo
 
  //1) buscar o registro do autor na ZA0 que esta sendo inserido no grid
-If ZA0->(DBSeek(xFilial("ZA0") + PADR(Upper(dFalec),TamSX3('ZA0_DTAFAL')[1] ) ))
+If ZA0->(DBSeek(xFilial("ZA0") + cCodAutor ))
  //2) pegar a data de falecimento
 
  //3) se a data nao estiver em branco, bloquear a inclusao exibindo msg de erro
  
-    If ZA0->ZA0_DTAFAL = EMPTY(dFalec)  
-    .F.    
+    If EMPTY(ZA0->ZA0_DTAFAL)
+    lRet:= .T.   
     else 
-        Help(, , "Texto do Help", , "Ele não pode estar aqui", 1, 0, , , , , , {"Digite um autor vivo"})
+       lRet:= .F. 
+       Help(, , "Texto do Help", , "Ele não pode estar aqui", 1, 0, , , , , , {"Digite um autor vivo"})
     EndIf
     
 EndIf
 
-
+RestArea(aArea)
 
 Return lRet
