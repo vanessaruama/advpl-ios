@@ -21,7 +21,8 @@ local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
 local bValid := {|oModelGrid| ValidAutor(oModelGrid)} //validacao da linha do grid
 oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,) // adiciona
 oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2, , bValid)
-oModel:SetRelation('ZA2DETAIL', { {'ZA2_FILIAL', 'xFilial("ZA2")'} }, ZA2 -> ( IndexKey(1)))
+oModel:SetRelation( 'ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
+ {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
 
 oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Musica')
 oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Musica')
