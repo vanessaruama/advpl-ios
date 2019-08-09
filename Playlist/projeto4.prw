@@ -13,7 +13,6 @@ Return
 
 Static Function Menudef()
 
-
 Return FWMVCMenu('projeto4') //Menu padrão com C.R.U.D. //nome da fonte
 
 Static function ModelDef() //sempre staticfunction

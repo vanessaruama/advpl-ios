@@ -1,4 +1,5 @@
 #include 'protheus.ch'
+#include "fwmvcdef.ch
 
 user function projeto3()
 local oBrowse := FWMBrowse():New() //Criar browse
@@ -13,7 +14,7 @@ Return
 
 Static Function Menudef()
 
-Return FWMVCMenu('projeto4') //Menu padrão com C.R.U.D. //nome da fonte
+Return FWMVCMenu('projeto3') //Menu padrão com C.R.U.D. //nome da fonte
 
 Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA7MODEL')
