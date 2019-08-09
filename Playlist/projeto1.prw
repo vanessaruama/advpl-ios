@@ -24,12 +24,15 @@ oModel:AddFields('ZA0MASTER',/*Owner*/ ,oStruZA0,/**/, bPos) // adiciona
 Return oModel
 
 Static Function PosVldAutor(oModelField)
-local lTudoOk := .T.
+local lTudoOk := .F.
 local dFalec := oModelField:GetValue('ZA0_DTAFAL') //Validação da Data
 local cNome := oModelField:GetValue('ZA0_NOME') // Validação do Nome
 
-If dFalec > Date() //Condição para a validação da Data 
-    lTudoOk := .F.
+If dFalec <= Date() //Condição para a validação da Data 
+    lTudoOk := .T.
+    
+Else 
+   .F.
     Help(, , "Texto do Help", , "Não adivinhe o futuro", 1, 0, , , , , , {"Digite uma data valida de falecimento"})
 EndIf    
 
@@ -37,6 +40,7 @@ return lTudoOk
 
 
 Static Function ViewDef() //sempre static function
+
 local oView := FWFormView():New() //objeto da view
 local oStruct := FWFormStruct(2,'ZA0')
 oView:SetModel(ModelDef()) // linka a view com o model

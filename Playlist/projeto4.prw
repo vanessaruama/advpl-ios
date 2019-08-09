@@ -1,5 +1,7 @@
  #include 'protheus.ch'
-user function projeto4()
+ #include 'fwmvcdef.ch'
+
+user function projeto4() //ALBUM
 local oBrowse := FWMBrowse():New() //Criar browse
 
 oBrowse:SetAlias('ZA3')
@@ -10,6 +12,7 @@ oBrowse:Activate() // ativar o browse
 Return
 
 Static Function Menudef()
+
 
 Return FWMVCMenu('projeto4') //Menu padrão com C.R.U.D. //nome da fonte
 

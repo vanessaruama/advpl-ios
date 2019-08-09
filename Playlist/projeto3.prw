@@ -1,22 +1,19 @@
 #include 'protheus.ch'
-#include 'fwmvcdef.ch'
 
 user function projeto3()
 local oBrowse := FWMBrowse():New() //Criar browse
 
-oBrowse:SetAlias('ZA7')
+oBrowse:SetAlias('ZA7') //PLAYLIST
 oBrowse:SetMenuDef('projeto3')
 
 oBrowse:Activate() // ativar o browse
 
 Return
 
+
 Static Function Menudef()
-local aRotina := FWMVCMenu('projeto3') 
 
-ADD OPTION aRotina Title 'Player gráfico' Action 'u_som' OPERATION 2 ACCESS 0
-
-Return aRotina //Menu padrão com C.R.U.D.
+Return FWMVCMenu('projeto4') //Menu padrão com C.R.U.D. //nome da fonte
 
 Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA7MODEL')
@@ -30,6 +27,7 @@ oModel:SetRelation( 'ZA8DETAIL', { {'ZA8_FILIAL', "xFilial('ZA8')"},;
  {"ZA8_PLAY" , "ZA7_CODIGO"} }, ZA8->( IndexKey( 1 ) ) )
 
 oModel:GetModel('ZA8DETAIL'):SetDescription('Musicas da playlist')
+oModel:GetModel( 'ZA8DETAIL' ):SetUniqueLine( { 'ZA8_MUSICA' } )
 
 Return oModel
 
