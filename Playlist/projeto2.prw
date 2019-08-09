@@ -1,5 +1,4 @@
-#include 'protheus.ch'
-
+ #include 'protheus.ch'
 user function projeto2()
 local oBrowse := FWMBrowse():New() //Criar browse
 
@@ -18,7 +17,6 @@ Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA1MODEL')
 local oStruZA1 := FWFormStruct(1,'ZA1') //cria estrutura
 local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
-local oStruZA8 := FWFormStruct(1,'ZA8') //cria estrutura
 oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,) // adiciona
 
 
@@ -26,14 +24,9 @@ oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2, , )
 oModel:SetRelation( 'ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
  {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
 
-oModel:AddGrid('ZA8DETAIL', 'ZA1MASTER', oStruZA8, ,)
-oModel:SetRelation( 'ZA8DETAIL', { {'ZA8_FILIAL', "xFilial('ZA8')"},;
- {"ZA8_MUSICA" , "ZA1_MUSICA"} }, ZA8->( IndexKey( 1 ) ) )
 
 oModel:GetModel('ZA1MASTER'):SetDescription('Dados da Musica')
 oModel:GetModel('ZA2DETAIL'):SetDescription('Dados do Autor da Musica')
-oModel:GetModel('ZA8DETAIL'):SetDescription('Musicas da playlist')
-
 
 Return oModel
 
@@ -42,7 +35,6 @@ Static Function ViewDef() //sempre static function
 local oView := FWFormView():New() //objeto da view
 local oStruct := FWFormStruct(2,'ZA1')
 local oStructZA2 := FWFormStruct(2,'ZA2')
-local oStructZA8 := FWFormStruct(2,'ZA8')
 oView:SetModel(ModelDef()) // linka a view com o model
 
 
