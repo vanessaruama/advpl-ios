@@ -31,7 +31,6 @@ oModel:SetRelation( 'ZA8DETAIL', { {'ZA8_FILIAL', "xFilial('ZA8')"},;
 
 oModel:GetModel('ZA8DETAIL'):SetDescription('Musicas da playlist')
 
-
 Return oModel
 
 Static Function ViewDef() //sempre static function
