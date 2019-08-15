@@ -27,9 +27,9 @@ oModel:AddGrid('ZA4DETAIL', 'ZA3MASTER', oStruZA4, , )
 oModel:SetRelation( 'ZA4DETAIL', { {'ZA4_FILIAL', "xFilial('ZA4')"},;
  {"ZA4_ALBUM" , "ZA3_ALBUM"} }, ZA4->( IndexKey( 1 ) ) )
 
-oModel:AddGrid('ZA5DETAIL', 'ZA3MASTER', oStruZA5, , )
+oModel:AddGrid('ZA5DETAIL', 'ZA4DETAIL', oStruZA5, , )
 oModel:SetRelation( 'ZA5DETAIL', { {'ZA5_FILIAL', "xFilial('ZA5')"},;
-{"ZA5_ALBUM" , "ZA4_ALBUM"},{"ZA5_MUSICA" , "ZA4_MUSICA"} }, ZA5->( IndexKey( 1 ) ) )
+{"ZA5_ALBUM" , "ZA4_ALBUM"},{"ZA5_MUSICA" , "ZA4_MUSICA"}, {"ZA5_ALBUM" , "ZA3_ALBUM"} }, ZA5->( IndexKey( 1 ) ) )
 
 
 oModel:GetModel('ZA3MASTER'):SetDescription('Album')
@@ -46,10 +46,14 @@ local oStructZA4 := FWFormStruct(2,'ZA4')
 local oStructZA5 := FWFormStruct(2,'ZA5')
 oView:SetModel(ModelDef()) // linka a view com o model
 
+oStructZA4:RemoveField('ZA4_ALBUM')
+oStructZA5:RemoveField('ZA5_ALBUM')
+oStructZA5:RemoveField('ZA5_MUSICA')
 
 oView:AddField('ZA3_VIEW', oStruct, 'ZA3MASTER')
 oView:AddGrid('ZA4_VIEW', oStructZA4, 'ZA4DETAIL')
 oView:AddGrid('ZA5_VIEW', oStructZA5, 'ZA5DETAIL')
+
 
 
 oView:CreateHorizontalBox('BOXZA3', 40)

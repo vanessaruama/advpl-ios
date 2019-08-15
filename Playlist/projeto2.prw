@@ -17,9 +17,9 @@ Static function ModelDef() //sempre staticfunction
 local oModel := MPFormModel():New('ZA1MODEL')
 local oStruZA1 := FWFormStruct(1,'ZA1') //cria estrutura
 local oStruZA2 := FWFormStruct(1,'ZA2') //cria estrutura
-oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,) // adiciona
+local bPos := {|oModelField| VldMusica(oModelField)}
 
-
+oModel:AddFields('ZA1MASTER',/*Owner*/ ,oStruZA1,/**/,bPos) // adiciona
 oModel:AddGrid('ZA2DETAIL', 'ZA1MASTER', oStruZA2, , )
 oModel:SetRelation( 'ZA2DETAIL', { {'ZA2_FILIAL', "xFilial('ZA2')"},;
  {"ZA2_MUSICA" , "ZA1_MUSICA"} }, ZA2->( IndexKey( 1 ) ) )
@@ -35,6 +35,7 @@ Static Function ViewDef() //sempre static function
 local oView := FWFormView():New() //objeto da view
 local oStruct := FWFormStruct(2,'ZA1')
 local oStructZA2 := FWFormStruct(2,'ZA2')
+
 oView:SetModel(ModelDef()) // linka a view com o model
 
 
@@ -43,9 +44,9 @@ oView:AddGrid('ZA2_VIEW', oStructZA2, 'ZA2DETAIL')
 oView:AddIncrementField('ZA2_VIEW', 'ZA2_ITEM')
 
 
-oView:CreateHorizontalBox('BOXZA1', 50)
-oView:CreateHorizontalBox('BOXZA2', 25)
-
+oView:CreateHorizontalBox('BOXZA1', 60)
+oView:CreateHorizontalBox('BOXZA2', 40)
+  
 oView:SetOwnerView('ZA1_VIEW','BOXZA1') //colocar um componente no outro
 oView:SetOwnerView('ZA2_VIEW','BOXZA2') //colocar um componente no outro
 
@@ -55,3 +56,16 @@ oView:EnableTitleView('ZA2_VIEW')
 
 Return oView
 
+Static Function VldMusica(oModelField)
+        local lOK := .T.
+        local dCriar := oModelField:GetValue("ZA1_DATA")
+        local cGenero := oModelField:GetValue("ZA1_GENERO")
+
+        If dCriar > DATE()
+            lOK := .F.
+            HELP(,, 'Data de Criação',, 'Data de criação não pode ser maior que a data atual',1,0,,,,,, {"Exemplo: " + CRLF + "Data de Hoje: " + dToC(DATE()) + CRLF + "Data de Criação: 01/01/2010"})
+        ElseIf EMPTY(cGenero)
+            lOK := .F.
+            HELP(,, 'Gênero',, 'Gênero não pode ser vazio',1,0,,,,,, {"Selecione um dos gêneros no campo de seleção"})
+        EndIf    
+    Return lOK
